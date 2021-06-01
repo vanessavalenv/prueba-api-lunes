@@ -31,7 +31,7 @@ public class AlumnoController {
 		return ResponseEntity.ok(service.listaAlumno());
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("{id}")
 	@ResponseBody
 	public ResponseEntity<Alumno> eliminarPorId(@PathVariable("id") int idAlumno){
 		Optional<Alumno> optAlumno = service.obtienePorId(idAlumno);
@@ -43,7 +43,7 @@ public class AlumnoController {
 		}
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/{/porId/{id}")
 	@ResponseBody
 	public ResponseEntity<Alumno> listaPorId(@PathVariable("id") int idAlumno){
 		Optional<Alumno> optAlumno =  service.obtienePorId(idAlumno);
@@ -53,6 +53,16 @@ public class AlumnoController {
 			return ResponseEntity.notFound().build();
 		}
 	}
+	
+	@GetMapping("/{/porId/{dni}")
+	
+	@ResponseBody
+	public ResponseEntity<List<Alumno>> listaPorDni(@PathVariable("dni") String dni){
+		List<Alumno> lista =  service.listaPorDni(dni);
+		return ResponseEntity.ok(lista);
+		
+		}
+
 	
 	@PostMapping
 	@ResponseBody
